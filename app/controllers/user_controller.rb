@@ -1,5 +1,6 @@
 class UserController < ApplicationController
   get '/signup' do
+    @trying = 1
     if !logged_in?
       erb :'users/create_user'
     else
@@ -19,6 +20,7 @@ class UserController < ApplicationController
   end
 
   get '/login' do
+    @trying = 1
     if !logged_in?
       erb :'users/login'
     else

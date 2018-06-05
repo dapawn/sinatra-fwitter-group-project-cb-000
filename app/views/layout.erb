@@ -5,17 +5,12 @@
   </head>
   <body>
 
-    <%= yield %>
-<% if false %>
-<-- Could we simplify alot of our code with something like the following:
-<--      where thrying was set in login and signup routes
-    <% if logged_in? || !!trying %>
+    <% if logged_in? || !!@trying %>
       <%= yield %>
     <% else %>
       <h1> Welcome to Fwitter </h1>
       <h2>Please <a href="/login">Sign In</a> or <a href="/signup">Sign Up</a> to continue.</h2>
     <%end %>
--->
-<% end %>
+
   </body>
 </html>

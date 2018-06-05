@@ -1,6 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  @trying = nil
 
   configure do
     set :public_folder, 'public'
@@ -11,6 +12,10 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     erb :index
+  end
+
+  get '/fwitter' do
+    send_file File.join(settings.public_folder, 'fwitter.tar.gz')
   end
 
   helpers do

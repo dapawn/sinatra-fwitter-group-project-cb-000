@@ -1,20 +1,14 @@
+require 'pry'
+
 class TweetController < ApplicationController
 
   get '/tweets' do
-    if logged_in?
       @tweets = Tweet.all
       erb :'tweets/tweets'
-    else
-      redirect to '/login'
-    end
   end
 
   get '/tweets/new' do
-    if logged_in?
       erb :'tweets/create_tweet'
-    else
-      redirect to '/login'
-    end
   end
 
   post '/tweets' do
@@ -27,25 +21,17 @@ class TweetController < ApplicationController
   end
 
   get '/tweets/:id' do
-    if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
-    else
-      redirect to '/login'
-    end
   end
 
   get '/tweets/:id/edit' do
-    if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == current_user.id
        erb :'tweets/edit_tweet'
       else
         redirect to '/tweets'
       end
-    else
-      redirect to '/login'
-    end
   end
 
   post '/tweets/:id' do
@@ -60,13 +46,9 @@ class TweetController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       @tweet.delete if @tweet.user_id == current_user.id
       redirect to '/tweets'
-    else
-      redirect to '/login'
-    end
   end
 
 end
